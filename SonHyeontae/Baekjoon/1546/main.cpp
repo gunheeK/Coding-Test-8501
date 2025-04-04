@@ -27,5 +27,7 @@ int main() {
 
 	cout << avg;
 
+	delete[] arr;
+
 	return 0;
 }
