@@ -5,26 +5,28 @@
 using namespace std;
 
 int main() {
+	std::cin.tie(NULL);
+	std::ios::sync_with_stdio(false);
+
 	int n, b;
-	cin >> n >> b;
+	std::cin >> n >> b;
 
 	int e = 0;
-	double exp = pow(b, e);
-	while (exp < n) {
+	int exp = pow(b, e);
+	while (exp <= n) {
 		exp = pow(b, ++e);
 	}
-	e--;
 
 	string s;
 
 	for (; e >= 0; e--) {
-		double i = (n / pow(b, e));
-		if (i > 1) {
+		int i = (n / pow(b, e));
+		if (i >= 1) {
 			if (i >= 10) {
-				s.push_back(char(i + 55));
+				s.push_back(static_cast<char>(i + 55));
 			}
 			else {
-				s.push_back(char(i));
+				s += to_string(i);
 			}
 			int p = pow(b, e);
 			n %= p;
@@ -33,6 +35,8 @@ int main() {
 			s.push_back('0');
 		}
 	}
+
+	if (s.front() == '0') s.erase(0, 1);
 
 	for (char e : s)
 		cout << e;
