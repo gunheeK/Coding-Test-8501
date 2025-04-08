@@ -4,28 +4,24 @@
 using namespace std;
 
 int main() {
-	int n;
+	vector<vector<int>> vec(101, vector<int>(101, 0));
+	
+	int n, x, y;
 	cin >> n;
 
-	int area = n * 100;
-
-	vector<vector<int>> vec(n, vector<int>(2, 0));
-	
-	int x, y;
 	for (int i = 0; i < n; i++) {
 		cin >> x >> y;
-		vec[i][0] = x;
-		vec[i][1] = y;
+		for (int j = x; j < x + 10; j++) {
+			for (int k = y; k < y + 10; k++) {
+				vec[j][k] = 1;
+			}
+		}
 	}
 
-	for (int i = 0; i < n; i++) {
-		for (int j = i + 1; j < n; j++) {
-			int abs_x = abs(vec[i][0] - vec[j][0]);
-			int abs_y = abs(vec[i][1] - vec[j][1]);
-
-			if ((abs_x < 10) && (abs_y < 10)) {
-				area -= (10 - abs_x) * (10 - abs_y);
-			}
+	int area = 0;
+	for (int i = 1; i < 101; i++) {
+		for (int j = 1; j < 101; j++) {
+			if (vec[i][j] == 1) area++;
 		}
 	}
 
