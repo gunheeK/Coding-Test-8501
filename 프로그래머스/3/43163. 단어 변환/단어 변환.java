@@ -1,4 +1,5 @@
 import java.util.*;
+
 class Solution {
     public int solution(String begin, String target, String[] words) {
         if(!Arrays.asList(words).contains(target))
@@ -8,28 +9,29 @@ class Solution {
         boolean[] visited = new boolean[words.length];
         q.offer(begin);
         depth.offer(0);
-        
         while(!q.isEmpty()) {
             String current = q.poll();
-            int d = depth.poll();
+            int currentDepth = depth.poll();
             if(current.equals(target))
-                return d;
+                return currentDepth;
             for(int i = 0; i < words.length; i++) {
-                if(!visited[i] && canchange(current, words[i])) {
+                if(!visited[i] && check(current, words[i])) {
                     visited[i] = true;
                     q.offer(words[i]);
-                    depth.offer(d + 1);
+                    depth.offer(currentDepth + 1);
                 }
             }
         }
-        return 0;
+        int answer = 0;
+        return answer;
     }
-    public boolean canchange(String a, String b) {
-        int diff = 0;
-        for(int i = 0; i < a.length(); i++) {
-         if(a.charAt(i) != b.charAt(i))
-             diff++;
+    
+    boolean check(String current, String word) {
+        int jug = 0;
+        for(int i = 0; i < current.length(); i++) {
+            if(current.charAt(i) != word.charAt(i))
+                jug++;
         }
-        return diff == 1;
+        return jug == 1;
     }
 }
